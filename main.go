@@ -38,6 +38,10 @@ func Genesis() *Block {
   return CreateBlock("Geneis", []byte{})
 }
 
+func InitBlockChain() *BlockChain {
+  return &BlockChain{[]*Block{Genesis()}}
+}
+
 func main()  {
 
 }
