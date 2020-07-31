@@ -1,4 +1,4 @@
-module github.com/tensor-programming/golang-blockchain
+module github.com/Dmitry1007/golang-blockchain
 
 go 1.14
 
