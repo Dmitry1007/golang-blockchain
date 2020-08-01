@@ -2,8 +2,6 @@ package blockchain
 
 import  (
   "fmt"
-  "bytes"
-  "crypto/sha256"
 )
 
 type BlockChain struct {
@@ -14,6 +12,7 @@ type Block struct {
   Hash      []byte
   Data      []byte
   PrevHash  []byte
+  Nonce     int
 }
 
 func CreateBlock(data string, prevHash []byte) *Block {

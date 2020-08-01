@@ -2,6 +2,12 @@ package blockchain
 
 import (
   "fmt"
+  "bytes"
+  "crypto/sha256"
+  "math/big"
+  "math"
+  "encoding/binary"
+  "log"
 )
 
 // Take the data from the block
@@ -53,7 +59,7 @@ func (pow *ProofOfWork) Run() (int, []byte) {
     fmt.Printf("\r%x", hash)
     intHash.SetBytes(hash[:])
 
-    if initHash.Cmp(pow.Target) == -1 {
+    if intHash.Cmp(pow.Target) == -1 {
       break
     } else {
       nonce++
