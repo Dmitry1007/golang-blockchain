@@ -15,6 +15,15 @@ type Block struct {
   Nonce     int
 }
 
+func InitBlockChain() *BlockChain {
+  fmt.Println("Init BlockChain")
+  return &BlockChain{[]*Block{Genesis()}}
+}
+
+func Genesis() *Block {
+  return CreateBlock("Genesis", []byte{})
+}
+
 func CreateBlock(data string, prevHash []byte) *Block {
   block := &Block{[]byte{}, []byte(data), prevHash, 0}
   pow := NewProof(block)
@@ -26,15 +35,6 @@ func CreateBlock(data string, prevHash []byte) *Block {
 
 func (chain *BlockChain) AddBlock(data string) {
   prevBlock := chain.Blocks[len(chain.Blocks)-1]
-  new := CreateBlock(data, prevBlock.Hash)
-  chain.Blocks = append(chain.Blocks, new)
-}
-
-func Genesis() *Block {
-  return CreateBlock("Genesis", []byte{})
-}
-
-func InitBlockChain() *BlockChain {
-  fmt.Println("Init BlockChain")
-  return &BlockChain{[]*Block{Genesis()}}
+  newBlock := CreateBlock(data, prevBlock.Hash)
+  chain.Blocks = append(chain.Blocks, newBlock)
 }
