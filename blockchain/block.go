@@ -1,40 +1,40 @@
 package blockchain
 
-import  (
-  "fmt"
+import (
+	"fmt"
 )
 
 type BlockChain struct {
-  Blocks []*Block
+	Blocks []*Block
 }
 
 type Block struct {
-  Hash      []byte
-  Data      []byte
-  PrevHash  []byte
-  Nonce     int
+	Hash     []byte
+	Data     []byte
+	PrevHash []byte
+	Nonce    int
 }
 
 func InitBlockChain() *BlockChain {
-  fmt.Println("Init BlockChain")
-  return &BlockChain{[]*Block{Genesis()}}
+	fmt.Println(" Init BlockChain ")
+	return &BlockChain{[]*Block{Genesis()}}
 }
 
 func Genesis() *Block {
-  return CreateBlock("Genesis", []byte{})
+	return CreateBlock("Genesis", []byte{})
 }
 
 func CreateBlock(data string, prevHash []byte) *Block {
-  block := &Block{[]byte{}, []byte(data), prevHash, 0}
-  pow := NewProof(block)
-  nonce, hash := pow.Run()
-  block.Hash  = hash[:]
-  block.Nonce = nonce
-  return block
+	block := &Block{[]byte{}, []byte(data), prevHash, 0}
+	pow := NewProof(block)
+	nonce, hash := pow.Run()
+	block.Hash = hash[:]
+	block.Nonce = nonce
+	return block
 }
 
 func (chain *BlockChain) AddBlock(data string) {
-  prevBlock := chain.Blocks[len(chain.Blocks)-1]
-  newBlock := CreateBlock(data, prevBlock.Hash)
-  chain.Blocks = append(chain.Blocks, newBlock)
+	prevBlock := chain.Blocks[len(chain.Blocks)-1]
+	newBlock := CreateBlock(data, prevBlock.Hash)
+	chain.Blocks = append(chain.Blocks, newBlock)
 }

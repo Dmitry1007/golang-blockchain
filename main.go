@@ -1,25 +1,26 @@
 package main
 
-import  (
-  "github.com/Dmitry1007/golang-blockchain/blockchain"
-  "fmt"
-  "strconv"
+import (
+	"fmt"
+	"strconv"
+
+	"github.com/Dmitry1007/golang-blockchain/blockchain"
 )
 
-func main()  {
-  chain := blockchain.InitBlockChain()
+func main() {
+	chain := blockchain.InitBlockChain()
 
-  chain.AddBlock("Second Block After Genesis")
-  chain.AddBlock("Third Block After Genesis")
+	chain.AddBlock("Second Block After Genesis")
+	chain.AddBlock("Third Block After Genesis")
 
-  for _, block := range chain.Blocks {
-    fmt.Printf("Previous Hash: %x\n", block.PrevHash)
-    fmt.Printf("Data in Block: %s\n", block.Data)
-    fmt.Printf("Hash: %x\n", block.Hash)
+	for _, block := range chain.Blocks {
+		fmt.Printf("Previous Hash: %x\n", block.PrevHash)
+		fmt.Printf("Data in Block: %s\n", block.Data)
+		fmt.Printf("Hash: %x\n", block.Hash)
 
-    pow := blockchain.NewProof(block)
-    fmt.Printf("PoW: %s\n", strconv.FormatBool(pow.Validate()))
-    fmt.Println()
-  }
+		pow := blockchain.NewProof(block)
+		fmt.Printf("PoW: %s\n", strconv.FormatBool(pow.Validate()))
+		fmt.Println()
+	}
 
 }
